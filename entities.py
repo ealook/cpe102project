@@ -6,6 +6,15 @@ class Background:
       self.imgs = imgs
       self.current_img = 0
 
+   def get_images(self):
+      return self.imgs
+
+   def get_image(self):
+      return self.imgs[self.current_img]
+
+   def get_name(self):
+      return self.name
+
    def entity_string(self):
       return 'unknown'
 
@@ -274,7 +283,7 @@ class Ore:
 
 
    def get_rate(self):
-   return self.rate
+      return self.rate
 
 
    def set_resource_count(self, n):
