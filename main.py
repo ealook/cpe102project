@@ -1,7 +1,3 @@
-//
-// Ethan Look
-//
-
 import controller
 import entities
 import image_store
