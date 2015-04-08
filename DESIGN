@@ -1,0 +1,36 @@
+class: 
+
+
+Not turned into a method:
+	sign: no logical class to associate with.
+	adjacent: no logical class to associate with. Maybe Point?
+	next_position: no logical class to associate with.
+	blob_next_position: no logical class to associate with.
+	miner_to_ore: no logical class to associate with.
+	miner_to_smith: no logical class to associate with.
+	create_miner_not_full_action: no logical class to associate with.
+	create_miner_full_action: no logical class to associate with.
+	blob_to_vein: no logical class to associate with.
+	create_ore_blob_action: no logical class to associate with.
+	find_open_around: no logical class to associate with.
+	create_vein_action: no logical class to associate with.
+	try_transform_miner_full: no logical class to associate with.
+	try_transform_miner_not_full: no logical class to associate with.
+	try_transform_miner: no logical class to associate with.
+	create_miner_action: no logical class to associate with.
+	create_animation_action: no logical class to associate with.
+	create_entity_death_action: no logical class to associate with.
+	create_ore_transform_action: no logical class to associate with.
+	remove_entity: no logical class to associate with.
+	create_blob: no logical class to associate with.
+	schedule_blob: no logical class to associate with.
+	schedule_miner: no logical class to associate with.
+	create_ore: no logical class to associate with.
+	schedule_ore: no logical class to associate with.
+	create_quake: no logical class to associate with.
+	schedule_quake: no logical class to associate with.
+	create_vein: no logical class to associate with.
+	schedule_vein: no logical class to associate with.
+	schedule_action: no logical class to associate with.
+	schedule_animation: no logical class to associate with.
+	clear_pending_actions: no logical class to associate with.
