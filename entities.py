@@ -372,27 +372,12 @@ class Vein:
       return self.rate
 
 
-   def set_resource_count(self, n):
-      self.resource_count = n
-
-   def get_resource_count(self):
-      return self.resource_count
-
-
-   def get_resource_limit(self):
-      return self.resource_limit
-
-
    def get_resource_distance(self):
       return self.resource_distance
 
 
    def get_name(self):
       return self.name
-
-
-   def get_animation_rate(self):
-      return self.animation_rate
 
 
    def remove_pending_action(self, action):
@@ -506,27 +491,8 @@ class Ore:
       return self.rate
 
 
-   def set_resource_count(self, n):
-      self.resource_count = n
-
-   def get_resource_count(self):
-      return self.resource_count
-
-
-   def get_resource_limit(self):
-      return self.resource_limit
-
-
-   def get_resource_distance(self):
-      return self.resource_distance
-
-
    def get_name(self):
       return self.name
-
-
-   def get_animation_rate(self):
-      return self.animation_rate
 
 
    def remove_pending_action(self, action):
@@ -782,21 +748,6 @@ class OreBlob:
       return self.rate
 
 
-   def set_resource_count(self, n):
-      self.resource_count = n
-
-   def get_resource_count(self):
-      return self.resource_count
-
-
-   def get_resource_limit(self):
-      return self.resource_limit
-
-
-   def get_resource_distance(self):
-      return self.resource_distance
-
-
    def get_name(self):
       return self.name
 
@@ -910,21 +861,6 @@ class Quake:
 
    def get_rate(self):
       return self.rate
-
-
-   def set_resource_count(self, n):
-      self.resource_count = n
-
-   def get_resource_count(self):
-      return self.resource_count
-
-
-   def get_resource_limit(self):
-      return self.resource_limit
-
-
-   def get_resource_distance(self):
-      return self.resource_distance
 
 
    def get_name(self):

@@ -69,6 +69,23 @@ ore ore_26_10 26 10 22746
 ore ore_27_10 27 10 28188
 ore ore_27_11 27 11 24297
 ore ore_26_11 26 11 22855
+obstacle obstacle_8_15 8 15
+obstacle obstacle_9_15 9 15
+obstacle obstacle_8_16 8 16
+obstacle obstacle_8_17 8 17
+obstacle obstacle_8_18 8 18
+obstacle obstacle_8_19 8 19
+obstacle obstacle_9_19 9 19
+obstacle obstacle_9_17 9 17
+obstacle obstacle_10_15 10 15
+obstacle obstacle_10_19 10 19
+obstacle obstacle_12_15 12 15
+obstacle obstacle_12_16 12 16
+obstacle obstacle_12_17 12 17
+obstacle obstacle_12_18 12 18
+obstacle obstacle_12_19 12 19
+obstacle obstacle_13_19 13 19
+obstacle obstacle_14_19 14 19
 background grass 0 0
 background grass 1 0
 background grass 2 0
