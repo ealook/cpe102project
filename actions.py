@@ -64,51 +64,6 @@ def blob_next_position(world, entity_pt, dest_pt):
    return new_pt
 
 
-def miner_to_ore(world, entity, ore):
-   entity_pt = entity.get_position()
-   if not ore:
-      return ([entity_pt], False)
-   ore_pt = ore.get_position()
-   if entity_pt.adjacent_to(ore_pt):
-      entity.set_resource_count(1 + entity.get_resource_count())
-      remove_entity(world, ore)
-      return ([ore_pt], True)
-   else:
-      new_pt = next_position(world, entity_pt, ore_pt)
-      return (world.move_entity(entity, new_pt), False)
-
-
-def miner_to_smith(world, entity, smith):
-   entity_pt = entity.get_position()
-   if not smith:
-      return ([entity_pt], False)
-   smith_pt = smith.get_position()
-   if entity_pt.adjacent_to(smith_pt):
-      smith.set_resource_count(smith.get_resource_count() +
-         entity.get_resource_count())
-      entity.set_resource_count(0)
-      return ([], True)
-   else:
-      new_pt = next_position(world, entity_pt, smith_pt)
-      return (world.move_entity(entity, new_pt), False)
-
-
-def blob_to_vein(world, entity, vein):
-   entity_pt = entity.get_position()
-   if not vein:
-      return ([entity_pt], False)
-   vein_pt = vein.get_position()
-   if entity_pt.adjacent_to(vein_pt):
-      remove_entity(world, vein)
-      return ([vein_pt], True)
-   else:
-      new_pt = blob_next_position(world, entity_pt, vein_pt)
-      old_entity = world.get_tile_occupant(new_pt)
-      if isinstance(old_entity, entities.Ore):
-         remove_entity(world, old_entity)
-      return (world.move_entity(entity, new_pt), False)
-
-
 def find_open_around(world, pt, distance):
    for dy in range(-distance, distance + 1):
       for dx in range(-distance, distance + 1):
