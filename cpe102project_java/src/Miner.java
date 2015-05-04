@@ -1,3 +1,4 @@
+import java.util.concurrent.Callable;
 
 public class Miner extends Mover {
 
@@ -20,6 +21,17 @@ public class Miner extends Mover {
 
     public int get_resource_limit() {
         return resource_limit;
+    }
+
+    public Miner try_transform_miner(WorldModel world, Miner new_entity) {
+        if (this != new_entity) {
+            //this.clear_pending_actions(world);
+            world.remove_entity_at(this.getPosition());
+            world.add_entity(new_entity);
+            //new_entity.schedule_animation(world);
+        }
+
+        return new_entity;
     }
 
 }
