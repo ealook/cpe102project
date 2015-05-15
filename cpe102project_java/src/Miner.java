@@ -1,12 +1,15 @@
+import processing.core.PImage;
+
+import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-public class Miner extends Mover {
+public abstract class Miner extends Mover {
 
     public final int resource_limit;
     public int resource_count;
 
-    public Miner(String name, Point position, int rate, int resource_limit, int resource_count) {
-        super(name, position, rate);
+    public Miner(String name, Point position, int rate, int resource_limit, int resource_count, ArrayList<PImage> imgs) {
+        super(name, position, rate, imgs);
         this.resource_limit = resource_limit;
         this.resource_count = resource_count;
     }
@@ -23,51 +26,60 @@ public class Miner extends Mover {
         return resource_limit;
     }
 
-    public Miner try_transform_miner(WorldModel world, Miner new_entity) {
+    public Miner try_transform_miner(WorldModel world, MinerOperation minerMaker) {
+        Miner new_entity = minerMaker.run();
         if (this != new_entity) {
-            //this.clear_pending_actions(world);
             world.remove_entity_at(this.getPosition());
             world.add_entity(new_entity);
-            //new_entity.schedule_animation(world);
         }
 
         return new_entity;
     }
 
-    public boolean miner_to_ore(WorldModel world, Ore ore) {
+    public FinderPair miner_to_ore(WorldModel world, Ore ore) {
         Point entity_pt = this.getPosition();
         if (ore == null) {
-            return false;
+            return new FinderPair(entity_pt, false);
         }
         Point ore_pt = ore.getPosition();
         if (entity_pt.adjacent_to(ore_pt)) {
             this.set_resource_count(1 + this.get_resource_count());
-            //actions.remove_entity(world, ore);
             world.remove_entity(ore);
-            return true;
+            return new FinderPair(ore_pt, true);
         } else {
             Point new_pt = next_position(world, entity_pt, ore_pt);
             world.move_entity(this, new_pt);
-            return false;
+            return new FinderPair(world.move_entity(this, new_pt).get(1), false);
         }
     }
 
-    public boolean miner_to_smith(WorldModel world, Blacksmith smith) {
+    public FinderPair miner_to_smith(WorldModel world, Blacksmith smith) {
         Point entity_pt = this.getPosition();
         if (smith == null) {
-            return false;
+            return new FinderPair(entity_pt, false);
         }
         Point smith_pt = smith.getPosition();
         if (entity_pt.adjacent_to(smith_pt)) {
             smith.set_resource_count(smith.get_resource_count() + this.get_resource_count());
             this.set_resource_count(0);
-            return true;
+            return new FinderPair(null, true);
         } else {
             Point new_pt = next_position(world, entity_pt, smith_pt);
             world.move_entity(this, new_pt);
-            return false;
+            return new FinderPair(world.move_entity(this, new_pt).get(1), false);
         }
     }
+
+    @Override
+    public void schedule_entity(WorldModel world, ImageStore i_store) {
+        this.schedule_miner(world, System.currentTimeMillis(), i_store);
+    }
+
+    public void schedule_miner(WorldModel world, long ticks, ImageStore i_store) {
+        this.schedule_action(this.create_miner_action(world, i_store), ticks + this.get_rate());
+    }
+
+    public abstract ActOperation create_miner_action(WorldModel world, ImageStore i_store);
 
     public static Point next_position(WorldModel world, Point entity_pt, Point dest_pt) {
         int horiz = sign(dest_pt.getX() - entity_pt.getX());
@@ -83,15 +95,5 @@ public class Miner extends Mover {
         }
 
         return  new_pt;
-    }
-
-    public static int sign(int x) {
-        if (x < 0) {
-            return -1;
-        } else if (x > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
     }
 }

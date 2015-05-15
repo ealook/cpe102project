@@ -9,7 +9,8 @@ public class Point {
     }
 
     public boolean adjacent_to(Point other) {
-        return (Math.abs(this.x - other.x) == 1) || (Math.abs(this.y - other.y) == 1);
+        return (Math.abs(this.getX() - other.getX()) == 1 && this.getY() == other.getY())
+                || (Math.abs(this.getY() - other.getY()) == 1 && this.getX() == other.getX());
     }
 
     public int getX() {

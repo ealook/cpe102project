@@ -1,3 +1,6 @@
+import processing.core.PImage;
+
+import java.util.ArrayList;
 
 public class Blacksmith extends WorldEntity {
 
@@ -6,8 +9,8 @@ public class Blacksmith extends WorldEntity {
     private final int rate;
     private final int resource_distance;
 
-    public Blacksmith(String name, Point position, int resource_limit, int rate) {
-        super(name, position);
+    public Blacksmith(String name, Point position, int resource_limit, int rate, ArrayList<PImage> imgs) {
+        super(name, position, imgs);
         this.resource_limit = resource_limit;
         this.rate = rate;
         this.resource_count = 0;
