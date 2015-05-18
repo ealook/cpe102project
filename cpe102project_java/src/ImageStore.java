@@ -61,6 +61,7 @@ public class ImageStore {
         if (attrs.length >= 2) {
             String key = attrs[0];
 
+            // Create the image and remove masks if needed.
             PImage img = setAlpha(parent.loadImage(src_path + attrs[1]), parent.color(252, 252, 252), 0);
             img = setAlpha(img, parent.color(201, 26, 26), 0);
             if (key.compareTo("blob") == 0 || key.compareTo("quake") == 0) {
@@ -71,14 +72,6 @@ public class ImageStore {
                 ArrayList<PImage> imgs = get_images_internal(key);
                 imgs.add(img);
                 images.put(key, imgs);
-
-                if (attrs.length == 6) {
-                    String r = attrs[2];
-                    String g = attrs[3];
-                    String b = attrs[4];
-                    String a = attrs[5];
-//                    img.set_colorkey(r, g, b, a);
-                }
             }
         }
     }

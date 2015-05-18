@@ -29,7 +29,6 @@ public class Main extends PApplet {
     private ImageStore i_store = new ImageStore(this, SRC_PATH, IMAGE_LIST_FILE_NAME);
 
     public void setup() {
-        System.out.println();
         size(SCREEN_WIDTH, SCREEN_HEIGHT);
 
         try {
