@@ -8,8 +8,8 @@ public abstract class Miner extends Mover {
     public final int resource_limit;
     public int resource_count;
 
-    public Miner(String name, Point position, int rate, int resource_limit, int resource_count, ArrayList<PImage> imgs) {
-        super(name, position, rate, imgs);
+    public Miner(String name, Point position, int rate, int resource_limit, int resource_count, ArrayList<PImage> imgs, WorldModel world) {
+        super(name, position, rate, imgs, world);
         this.resource_limit = resource_limit;
         this.resource_count = resource_count;
     }
@@ -47,7 +47,7 @@ public abstract class Miner extends Mover {
             world.remove_entity(ore);
             return new FinderPair(ore_pt, true);
         } else {
-            Point new_pt = next_position(world, entity_pt, ore_pt);
+            Point new_pt = next_position(world, entity_pt, ore_pt, Ore.class);
             world.move_entity(this, new_pt);
             return new FinderPair(world.move_entity(this, new_pt).get(1), false);
         }
@@ -64,7 +64,7 @@ public abstract class Miner extends Mover {
             this.set_resource_count(0);
             return new FinderPair(null, true);
         } else {
-            Point new_pt = next_position(world, entity_pt, smith_pt);
+            Point new_pt = next_position(world, entity_pt, smith_pt, Blacksmith.class);
             world.move_entity(this, new_pt);
             return new FinderPair(world.move_entity(this, new_pt).get(1), false);
         }
@@ -81,19 +81,12 @@ public abstract class Miner extends Mover {
 
     public abstract ActOperation create_miner_action(WorldModel world, ImageStore i_store);
 
-    public static Point next_position(WorldModel world, Point entity_pt, Point dest_pt) {
-        int horiz = sign(dest_pt.getX() - entity_pt.getX());
-        Point new_pt = new Point(entity_pt.getX() + horiz, entity_pt.getY());
-
-        if (horiz == 0 || world.is_occupied(new_pt)) {
-            int vert = sign(dest_pt.getY() - entity_pt.getY());
-            new_pt = new Point(entity_pt.getX(), entity_pt.getY() + vert);
-
-            if (vert == 0 || world.is_occupied(new_pt)) {
-                new_pt = entity_pt;
-            }
+    protected Point next_position(WorldModel world, Point entity_pt, Point dest_pt, Class dest_class) {
+        this.aStar(entity_pt, dest_pt, world, dest_class);
+        if (this.getPath().size() > 1) {
+            return this.getPath().get(this.getPath().size() - 2);
+        } else {
+            return entity_pt;
         }
-
-        return  new_pt;
     }
 }

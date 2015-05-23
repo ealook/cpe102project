@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class OreBlob extends Mover {
 
-    public OreBlob(String name, Point position, int rate, ArrayList<PImage> imgs) {
-        super(name, position, rate, imgs);
+    public OreBlob(String name, Point position, int rate, ArrayList<PImage> imgs, WorldModel world) {
+        super(name, position, rate, imgs, world);
     }
 
     @Override
@@ -27,8 +27,8 @@ public class OreBlob extends Mover {
 
             ArrayList<Point> tiles = new ArrayList<>();
 
+            this.setPath(new ArrayList<>());
             Point entity_pt = this.getPosition();
-
             Vein vein = (Vein) world.find_nearest(entity_pt, Vein.class);
             FinderPair search = this.blob_to_vein(world, vein);
 
@@ -57,7 +57,7 @@ public class OreBlob extends Mover {
             world.remove_entity(vein);
             return new FinderPair(vein_pt, true);
         } else {
-            Point new_pt = blob_next_position(world, entity_pt, vein_pt);
+            Point new_pt = blob_next_position(world, entity_pt, vein_pt, Vein.class);
             WorldEntity old_entity = world.get_tile_occupant(new_pt);
             if (old_entity != null && old_entity.getClass() == Ore.class) {
                 world.remove_entity(old_entity);
@@ -66,19 +66,12 @@ public class OreBlob extends Mover {
         }
     }
 
-    public static Point blob_next_position(WorldModel world, Point entity_pt, Point dest_pt) {
-        int horiz = sign(dest_pt.getX() - entity_pt.getX());
-        Point new_pt = new Point(entity_pt.getX() + horiz, entity_pt.getY());
-
-        if (horiz == 0 || (world.is_occupied(new_pt) && world.get_tile_occupant(new_pt).getClass() != Ore.class)) {
-            int vert = sign(dest_pt.getY() - entity_pt.getY());
-            new_pt = new Point(entity_pt.getX(), entity_pt.getY() + vert);
-
-            if (vert == 0 || (world.is_occupied(new_pt) && world.get_tile_occupant(new_pt).getClass() != Ore.class)) {
-                new_pt = entity_pt;
-            }
+    protected Point blob_next_position(WorldModel world, Point entity_pt, Point dest_pt, Class dest_class) {
+        this.aStar(entity_pt, dest_pt, world, dest_class);
+        if (this.getPath().size() > 1) {
+            return this.getPath().get(this.getPath().size() - 2);
+        } else {
+            return entity_pt;
         }
-
-        return  new_pt;
     }
 }

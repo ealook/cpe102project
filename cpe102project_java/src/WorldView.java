@@ -31,7 +31,7 @@ public class WorldView {
     private void draw_background() {
         for (int y = 0; y < this.viewport.getHeight(); y++) {
             for (int x = 0; x < this.viewport.getWidth(); x++) {
-                Point w_pt = viewport_to_world(this.viewport, new Point(x, y));
+                Point w_pt = viewport_to_world(new Point(x, y));
                 PImage img = this.world.get_background_image(w_pt);
                 parent.image(img, x * this.tile_width, y * this.tile_height);
             }
@@ -41,7 +41,7 @@ public class WorldView {
     private void draw_entities() {
         for (WorldEntity entity : this.world.getEntities()) {
             if (this.viewport.collidepoint(entity.getPosition().getX(), entity.getPosition().getY())) {
-                Point v_pt = world_to_viewport(this.viewport, entity.getPosition());
+                Point v_pt = world_to_viewport(entity.getPosition());
                 parent.image(entity.getCurrentImage(), v_pt.getX() * this.tile_width, v_pt.getY() * this.tile_height);
             }
         }
@@ -60,7 +60,7 @@ public class WorldView {
 
         for (Point tile : tiles) {
             if (this.viewport.collidepoint(tile.getX(), tile.getY())) {
-                Point v_pt = world_to_viewport(this.viewport, tile);
+                Point v_pt = world_to_viewport(tile);
                 PImage img = this.get_tile_image(v_pt);
                 this.update_tile(v_pt, img);
             }
@@ -79,7 +79,7 @@ public class WorldView {
     }
 
     private PImage get_tile_image(Point view_tile_pt) {
-        Point pt = viewport_to_world(this.viewport, view_tile_pt);
+        Point pt = viewport_to_world(view_tile_pt);
         PImage bgnd = this.world.get_background_image(pt);
         WorldEntity occupant = this.world.get_tile_occupant(pt);
         if (occupant != null) {
@@ -92,11 +92,11 @@ public class WorldView {
         }
     }
 
-    public static Point viewport_to_world(Rect viewport, Point pt) {
+    public Point viewport_to_world(Point pt) {
         return new Point(pt.getX() + viewport.getLeft(), pt.getY() + viewport.getTop());
     }
 
-    public static Point world_to_viewport(Rect viewport, Point pt) {
+    public Point world_to_viewport(Point pt) {
         return new Point(pt.getX() - viewport.getLeft(), pt.getY() - viewport.getTop());
     }
 

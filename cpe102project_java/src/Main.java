@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.File;
 import java.util.Map;
 
+
 public class Main extends PApplet {
 
     private static final boolean RUN_AFTER_LOAD = true;
@@ -65,8 +66,32 @@ public class Main extends PApplet {
             make_moves();
         }
 
-
         this.view.draw_viewport();
+        draw_mover_path();
+    }
+
+    private void draw_mover_path() {
+        int x = mouseX / TILE_WIDTH;
+        int y = mouseY / TILE_HEIGHT;
+
+        Point world_pt = view.viewport_to_world(new Point(x, y));
+
+        if (world.is_occupied(world_pt)) {
+            try {
+                Mover mover = (Mover) world.get_tile_occupant(world_pt);
+                ArrayList<Point> path = mover.getPath();
+                for (int i = 0; i < path.size() - 1; i++) {
+                    Point view_pt = view.world_to_viewport(path.get(i));
+                    fill(255, 0, 0);
+                    noStroke();
+                    rect(view_pt.getX() * TILE_WIDTH + 3 * TILE_WIDTH / 8, view_pt.getY() * TILE_HEIGHT + 3 * TILE_HEIGHT / 8, TILE_WIDTH / 4, TILE_HEIGHT / 4);
+                }
+            } catch (ClassCastException e) {
+                // do nothing
+            }
+        }
+
+
     }
 
     private void make_moves() {

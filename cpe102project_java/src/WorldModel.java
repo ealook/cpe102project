@@ -284,7 +284,7 @@ public class WorldModel {
                     new Point(Integer.parseInt(properties[MINER_COL]), Integer.parseInt(properties[MINER_ROW])),
                     Integer.parseInt(properties[MINER_RATE]),
                     Integer.parseInt(properties[MINER_LIMIT]),
-                    i_store.get_images(MINER_KEY));
+                    i_store.get_images(MINER_KEY), this);
             return miner;
         } else {
             return null;

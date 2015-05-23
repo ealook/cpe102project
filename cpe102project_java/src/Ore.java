@@ -40,7 +40,7 @@ public class Ore extends Actor {
 
             ArrayList<Point> tiles = new ArrayList<>();
 
-            OreBlob blob = new OreBlob(this.getName() + " -- blob", this.getPosition(), this.get_rate() / BLOB_RATE_SCALE, i_store.get_images("blob"));
+            OreBlob blob = new OreBlob(this.getName() + " -- blob", this.getPosition(), this.get_rate() / BLOB_RATE_SCALE, i_store.get_images("blob"), world);
             blob.schedule_blob(world, current_ticks, i_store);
             world.remove_entity(this);
             world.add_entity(blob);

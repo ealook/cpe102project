@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class MinerFull extends Miner {
 
-    public MinerFull(String name, Point position, int rate, int resource_limit, ArrayList<PImage> imgs) {
-        super(name, position, rate, resource_limit, resource_limit, imgs);
+    public MinerFull(String name, Point position, int rate, int resource_limit, ArrayList<PImage> imgs, WorldModel world) {
+        super(name, position, rate, resource_limit, resource_limit, imgs, world);
     }
 
     @Override
@@ -21,6 +21,7 @@ public class MinerFull extends Miner {
 
             this.remove_pending_action(action[0]);
 
+            this.setPath(new ArrayList<>());
             Point entity_pt = this.getPosition();
             Blacksmith smith = (Blacksmith) world.find_nearest(entity_pt, Blacksmith.class);
             FinderPair search = this.miner_to_smith(world, smith);
@@ -45,7 +46,7 @@ public class MinerFull extends Miner {
 
         MinerOperation minerMaker = () -> {
             MinerNotFull new_entity = new MinerNotFull(this.getName(), this.getPosition(),
-                    this.get_rate(), this.get_resource_limit(), this.getImgs());
+                    this.get_rate(), this.get_resource_limit(), this.getImgs(), world);
 
             return new_entity;
         };
