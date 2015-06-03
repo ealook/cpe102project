@@ -249,7 +249,7 @@ public class WorldModel {
         }
     }
 
-    private void add_background_from_file(String[] properties, ImageStore i_store) {
+    public void add_background_from_file(String[] properties, ImageStore i_store) {
         if (properties.length >= BGND_NUM_PROPERTIES) {
             Point pt = new Point(Integer.parseInt(properties[BGND_COL]), Integer.parseInt(properties[BGND_ROW]));
             String name = properties[BGND_NAME];
@@ -338,6 +338,37 @@ public class WorldModel {
         }
     }
 
+    private void create_spongebob(Point pt, ImageStore i_store) {
+        System.out.println("Spongebob created!");
+        Spongebob spongebob = new Spongebob("spongebob", pt, 200, i_store.get_images("spongebob"), this);
+        spongebob.schedule_spongebob(this, System.currentTimeMillis(), i_store);
+        add_entity(spongebob);
+    }
+
+    private void create_patrick(Point pt, ImageStore i_store) {
+        System.out.println("Patrick created!");
+        Patrick patrick = new Patrick("patrick", pt, 200, i_store.get_images("patrick"), this);
+        patrick.schedule_patrick(this, System.currentTimeMillis(), i_store);
+        add_entity(patrick);
+    }
+
+    private void create_all_krabs(ImageStore i_store) {
+        System.out.println("Creating all Mr. Krabs!");
+        ArrayList<WorldEntity> entities_to_remove = new ArrayList<>();
+        for (WorldEntity entity : entities) {
+            if (entity.getClass() == Blacksmith.class) {
+                entities_to_remove.add(entity);
+            }
+        }
+
+        for (int i = 0; i < entities_to_remove.size(); i++) {
+            Point entity_pt = entities_to_remove.get(i).getPosition();
+            remove_entity(entities_to_remove.get(i));
+            Krabs krabs = new Krabs("krabs", entity_pt, 14, 2400, i_store.get_images("krabs"));
+            add_entity(krabs);
+        }
+    }
+
     public static Point find_open_around(WorldModel world, Point pt, int distance) {
         for (int dy = -distance; dy < distance + 1; dy++) {
             for (int dx = -distance; dx < distance + 1; dx++) {
@@ -349,5 +380,67 @@ public class WorldModel {
             }
         }
         return null;
+    }
+
+    public void activateSpongebob(Point pt, ImageStore i_store) {
+        if (space_for_spongebob(pt)) {
+            System.out.println("Spongebob activated!");
+            System.out.println("At x: " + pt.getX() + ", y: " + pt.getY());
+
+            int start_x = pt.getX();
+            int start_y = pt.getY();
+            int size = 2;
+
+            for (int x = start_x - size; x <= start_x + size + 1; x++) {
+                for (int y = start_y - size; y <= start_y + size; y++) {
+                    add_background_from_file(new String[]{"background", "sand", String.valueOf(x), String.valueOf(y)}, i_store);
+                }
+            }
+
+
+            Point spongebob_pt = new Point(pt.getX(), pt.getY() + 1);
+            Point patrick_pt = new Point(pt.getX() + 1, pt.getY() + 1);
+
+            create_spongebob(spongebob_pt, i_store);
+            create_patrick(patrick_pt, i_store);
+            create_pineapple(pt, i_store);
+            create_all_krabs(i_store);
+        }
+    }
+
+    private void create_pineapple(Point pt, ImageStore i_store) {
+        Point bottomleft = new Point(pt.getX(), pt.getY());
+        Point middleleft = new Point(pt.getX(), pt.getY() - 1);
+        Point topleft = new Point(pt.getX(), pt.getY() - 2);
+        Point bottomright = new Point(pt.getX() + 1, pt.getY());
+        Point middleright = new Point(pt.getX() + 1, pt.getY() - 1);
+        Point topright = new Point(pt.getX() + 1, pt.getY() - 2);
+
+        PineapplePiece bottomleft_piece = new PineapplePiece("bottomleft pineapple", bottomleft, i_store.get_images("pineapple_bottomleft"));
+        PineapplePiece middleleft_piece = new PineapplePiece("middleleft pineapple", middleleft, i_store.get_images("pineapple_middleleft"));
+        PineapplePiece topleft_piece = new PineapplePiece("topleft pineapple", topleft, i_store.get_images("pineapple_topleft"));
+        PineapplePiece bottomright_piece = new PineapplePiece("bottomright pineapple", bottomright, i_store.get_images("pineapple_bottomright"));
+        PineapplePiece middleright_piece = new PineapplePiece("middleright pineapple", middleright, i_store.get_images("pineapple_middleright"));
+        PineapplePiece topright_piece = new PineapplePiece("topright pineapple", topright, i_store.get_images("pineapple_topright"));
+
+        add_entity(bottomleft_piece);
+        add_entity(middleleft_piece);
+        add_entity(topleft_piece);
+        add_entity(bottomright_piece);
+        add_entity(middleright_piece);
+        add_entity(topright_piece);
+    }
+
+    private boolean space_for_spongebob(Point pt) {
+        Point spongebob_pt = new Point(pt.getX(), pt.getY() + 1);
+        Point patrick_pt = new Point(pt.getX() + 1, pt.getY() + 1);
+        Point bottomleft = new Point(pt.getX(), pt.getY());
+        Point middleleft = new Point(pt.getX(), pt.getY() - 1);
+        Point topleft = new Point(pt.getX(), pt.getY() - 2);
+        Point bottomright = new Point(pt.getX() + 1, pt.getY());
+        Point middleright = new Point(pt.getX() + 1, pt.getY() - 1);
+        Point topright = new Point(pt.getX() + 1, pt.getY() - 2);
+        return !is_occupied(spongebob_pt) && !is_occupied(patrick_pt) && !is_occupied(bottomleft) && !is_occupied(bottomright)
+                && !is_occupied(middleleft) && !is_occupied(middleright) && !is_occupied(topleft) && !is_occupied(topright);
     }
 }

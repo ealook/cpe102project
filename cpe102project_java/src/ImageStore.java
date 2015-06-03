@@ -64,7 +64,13 @@ public class ImageStore {
             // Create the image and remove masks if needed.
             PImage img = setAlpha(parent.loadImage(src_path + attrs[1]), parent.color(252, 252, 252), 0);
             img = setAlpha(img, parent.color(201, 26, 26), 0);
-            if (key.compareTo("blob") == 0 || key.compareTo("quake") == 0) {
+            if (key.compareTo("blob") == 0 || key.compareTo("quake") == 0
+                    || key.compareTo("spongebob") == 0 || key.compareTo("gary") == 0
+                    || key.compareTo("krabbypatty") == 0 || key.compareTo("patrick") == 0
+                    || key.compareTo("sandy") == 0 || key.compareTo("krabs") == 0
+                    || key.compareTo("pineapple_bottomleft") == 0 || key.compareTo("pineapple_bottomright") == 0
+                    || key.compareTo("pineapple_middleleft") == 0 || key.compareTo("pineapple_middleright") == 0
+                    || key.compareTo("pineapple_topleft") == 0 || key.compareTo("pineapple_topright") == 0) {
                 img = setAlpha(img, parent.color(255, 255, 255), 0);
             }
 

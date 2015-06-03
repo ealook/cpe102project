@@ -138,6 +138,14 @@ public class Main extends PApplet {
         }
     }
 
+    public void mousePressed() {
+        int x = mouseX / TILE_WIDTH;
+        int y = mouseY / TILE_HEIGHT;
+
+        Point world_pt = view.viewport_to_world(new Point(x, y));
+        world.activateSpongebob(world_pt, i_store);
+    }
+
     private void next_images() {
         for (WorldEntity entity : this.world.getEntities()) {
             entity.next_image();
