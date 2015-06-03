@@ -1,0 +1,81 @@
+blacksmith images/blacksmith.bmp
+blob images/blob1.bmp 255 255 255 0
+blob images/blob2.bmp 255 255 255 0
+blob images/blob3.bmp 255 255 255 0
+blob images/blob4.bmp 255 255 255 0
+blob images/blob5.bmp 255 255 255 0
+blob images/blob6.bmp 255 255 255 0
+blob images/blob7.bmp 255 255 255 0
+blob images/blob8.bmp 255 255 255 0
+blob images/blob9.bmp 255 255 255 0
+blob images/blob10.bmp 255 255 255 0
+blob images/blob11.bmp 255 255 255 0
+blob images/blob12.bmp 255 255 255 0
+gary images/gary1.png 255 255 255 0
+gary images/gary2.png 255 255 255 0
+gary images/gary3.png 255 255 255 0
+gary images/gary4.png 255 255 255 0
+gary images/gary5.png 255 255 255 0
+gary images/gary6.png 255 255 255 0
+gary images/gary7.png 255 255 255 0
+grass images/grass.bmp
+krabbypatty images/krabbypatty.png
+krabs images/krabs1.png 255 255 255 0
+krabs images/krabs2.png 255 255 255 0
+krabs images/krabs3.png 255 255 255 0
+krabs images/krabs4.png 255 255 255 0
+krabs images/krabs5.png 255 255 255 0
+krabs images/krabs6.png 255 255 255 0
+krabs images/krabs7.png 255 255 255 0
+krabs images/krabs8.png 255 255 255 0
+miner images/miner1.bmp 252 252 252 0
+miner images/miner2.bmp 252 252 252 0
+miner images/miner3.bmp 252 252 252 0
+miner images/miner4.bmp 252 252 252 0
+miner images/miner5.bmp 252 252 252 0
+obstacle images/obstacle.bmp
+ore images/ore.bmp 201 26 26 0
+patrick images/patrick1.png 255 255 255 0
+patrick images/patrick2.png 255 255 255 0
+patrick images/patrick3.png 255 255 255 0
+patrick images/patrick4.png 255 255 255 0
+patrick images/patrick5.png 255 255 255 0
+patrick images/patrick6.png 255 255 255 0
+patrick images/patrick7.png 255 255 255 0
+patrick images/patrick8.png 255 255 255 0
+patrick images/patrick9.png 255 255 255 0
+patrick images/patrick10.png 255 255 255 0
+patrick images/patrick11.png 255 255 255 0
+pineapple_bottomleft images/bottomleft_pineapple.png
+pineapple_middleleft images/middleleft_pineapple.png
+pineapple_topleft images/topleft_pineapple.png
+pineapple_bottomright images/bottomright_pineapple.png
+pineapple_middleright images/middleright_pineapple.png
+pineapple_topright images/topright_pineapple.png
+quake images/quake1.bmp 255 255 255 0
+quake images/quake2.bmp 255 255 255 0
+quake images/quake3.bmp 255 255 255 0
+quake images/quake4.bmp 255 255 255 0
+quake images/quake5.bmp 255 255 255 0
+quake images/quake6.bmp 255 255 255 0
+rocks images/rock.bmp
+sand images/sand.png
+sandy images/sandy1.png 255 255 255 0
+sandy images/sandy2.png 255 255 255 0
+sandy images/sandy3.png 255 255 255 0
+sandy images/sandy4.png 255 255 255 0
+sandy images/sandy5.png 255 255 255 0
+sandy images/sandy6.png 255 255 255 0
+sandy images/sandy7.png 255 255 255 0
+sandy images/sandy8.png 255 255 255 0
+spongebob images/spongebob1.png 255 255 255 0
+spongebob images/spongebob2.png 255 255 255 0
+spongebob images/spongebob3.png 255 255 255 0
+spongebob images/spongebob4.png 255 255 255 0
+spongebob images/spongebob5.png 255 255 255 0
+spongebob images/spongebob6.png 255 255 255 0
+spongebob images/spongebob7.png 255 255 255 0
+spongebob images/spongebob8.png 255 255 255 0
+spongebob images/spongebob9.png 255 255 255 0
+vein images/vein.bmp
+background_default images/none.bmp

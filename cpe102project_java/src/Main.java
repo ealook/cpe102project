@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.io.File;
 import java.util.Map;
+import java.util.Random;
 
 
 public class Main extends PApplet {
@@ -14,14 +15,19 @@ public class Main extends PApplet {
     private final String IMAGE_LIST_FILE_NAME = "imagelist";
     private final String WORLD_FILE = "gaia.sav";
 
+    private Random random = new Random();
+
+
     private long next_time;
     private static final int ANIMATION_TIME = 100;
+    private long next_random_spawn_time;
+    private static final int RANDOM_SPAWN_TIME = 1200;
 
-    private final int WORLD_WIDTH_SCALE = 2;
-    private final int WORLD_HEIGHT_SCALE = 2;
+    private final int WORLD_WIDTH_SCALE = 2 / 2;
+    private final int WORLD_HEIGHT_SCALE = 2 / 2;
 
-    private final int SCREEN_WIDTH = 640;
-    private final int SCREEN_HEIGHT = 480;
+    private final int SCREEN_WIDTH = 640 * 2;
+    private final int SCREEN_HEIGHT = 480 * 2;
     private final int TILE_WIDTH = 32;
     private final int TILE_HEIGHT = 32;
 
@@ -55,6 +61,7 @@ public class Main extends PApplet {
         view.update_view(0, 0);
 
         next_time = System.currentTimeMillis() + ANIMATION_TIME;
+        next_random_spawn_time = System.currentTimeMillis() + RANDOM_SPAWN_TIME;
     }
 
     public void draw() {
@@ -64,6 +71,18 @@ public class Main extends PApplet {
             next_images();
             next_time = time + ANIMATION_TIME;
             make_moves();
+        }
+        if (time >= next_random_spawn_time) {
+            int x = random.nextInt(SCREEN_WIDTH / TILE_WIDTH * WORLD_WIDTH_SCALE);
+            int y = random.nextInt(SCREEN_HEIGHT / TILE_HEIGHT * WORLD_HEIGHT_SCALE);
+            Point random_pt = new Point(x, y);
+            if (!world.is_occupied(random_pt)) {
+                Vein new_vein = new Vein("randomly spawned vein", random_pt, 9456, i_store.get_images("vein"));
+                new_vein.schedule_entity(world, i_store);
+                world.add_entity(new_vein);
+            }
+
+            next_random_spawn_time = time + RANDOM_SPAWN_TIME;
         }
 
         this.view.draw_viewport();

@@ -405,6 +405,8 @@ public class WorldModel {
             create_patrick(patrick_pt, i_store);
             create_pineapple(pt, i_store);
             create_all_krabs(i_store);
+
+
         }
     }
 
