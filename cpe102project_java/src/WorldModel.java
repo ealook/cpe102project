@@ -443,6 +443,8 @@ public class WorldModel {
         Point middleright = new Point(pt.getX() + 1, pt.getY() - 1);
         Point topright = new Point(pt.getX() + 1, pt.getY() - 2);
         return !is_occupied(spongebob_pt) && !is_occupied(patrick_pt) && !is_occupied(bottomleft) && !is_occupied(bottomright)
-                && !is_occupied(middleleft) && !is_occupied(middleright) && !is_occupied(topleft) && !is_occupied(topright);
+                && !is_occupied(middleleft) && !is_occupied(middleright) && !is_occupied(topleft) && !is_occupied(topright)
+                && within_bounds(spongebob_pt) && within_bounds(patrick_pt) && within_bounds(bottomleft) && within_bounds(bottomright)
+                && within_bounds(middleleft) && within_bounds(middleright) && within_bounds(topleft) && within_bounds(topright);
     }
 }
